@@ -2,28 +2,16 @@ package com.acante.kotlinsecretproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.acante.kotlinsecretproject.base.BaseApplication
-import com.acante.kotlinsecretproject.di.component.ApplicationComponent
 import com.acante.kotlinsecretproject.di.component.DaggerApplicationComponent
-import com.acante.kotlinsecretproject.di.module.ActivityBindingModule
+import com.acante.kotlinsecretproject.di.module.ActivityModule
 import com.acante.kotlinsecretproject.repo.model.MovieData
-import com.acante.kotlinsecretproject.repo.rest.RequestInterface
 import com.acante.kotlinsecretproject.ui.base.BaseContact
 import com.acante.kotlinsecretproject.ui.main.MainContract
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), BaseContact.View {
@@ -57,7 +45,7 @@ class MainActivity : AppCompatActivity(), BaseContact.View {
 //            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 //            .build()
 //
-//        val movieData = retrofit.create(RequestInterface::class.java)
+//        val movieData = retrofit.create(ApiServiceInterface::class.java)
 //        movieData.getData()
 //            .subscribeOn(Schedulers.io())
 //            .unsubscribeOn(Schedulers.computation())
@@ -76,7 +64,7 @@ class MainActivity : AppCompatActivity(), BaseContact.View {
     }
 
     private fun injectDependency() {
-        val activityComponent = DaggerApplicationComponent.builder().activityBindingModule(ActivityBindingModule(this)).build()
+        val activityComponent = DaggerApplicationComponent.builder().activityBindingModule(ActivityModule(this)).build()
 //        activityComponent.buildActivity(this)
 //        activityComponent.inject(this.application as BaseApplication)
     }

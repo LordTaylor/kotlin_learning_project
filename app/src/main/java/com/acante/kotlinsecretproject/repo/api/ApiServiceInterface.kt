@@ -1,4 +1,4 @@
-package com.acante.kotlinsecretproject.repo.rest
+package com.acante.kotlinsecretproject.repo.api
 
 import com.acante.kotlinsecretproject.repo.model.MovieData
 import io.reactivex.Observable
@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Path
 
 
-interface RequestInterface {
+interface ApiServiceInterface {
 
     @GET("/jsony")
     fun getData():Observable<List<MovieData>>
@@ -20,13 +20,13 @@ interface RequestInterface {
     fun getRepo(@Path("owner") owner: String, @Path("name") name: String): Single<Repo>
 
     companion object Factory{
-        fun create():RequestInterface{
+        fun create():ApiServiceInterface{
             val retrofit = retrofit2.Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(Constance.BASE_URL)
                 .build()
-            return retrofit.create(RequestInterface::class.java)
+            return retrofit.create(ApiServiceInterface::class.java)
         }
 
     }

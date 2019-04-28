@@ -4,7 +4,7 @@ import android.util.Log
 import com.acante.kotlinsecretproject.repo.model.DetailsViewModel
 import com.acante.kotlinsecretproject.repo.model.MovieData
 import com.acante.kotlinsecretproject.repo.model.Post
-import com.acante.kotlinsecretproject.repo.rest.RequestInterface
+import com.acante.kotlinsecretproject.repo.api.ApiServiceInterface
 import com.acante.kotlinsecretproject.ui.base.BaseContact
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,7 +15,7 @@ class ListPresenter : ListContract.Presenter {
 
     private val subscription = CompositeDisposable()
 
-    private val api: RequestInterface = RequestInterface.create()
+    private val api: ApiServiceInterface = ApiServiceInterface.create()
 
     private lateinit var view: ListContract.View
 

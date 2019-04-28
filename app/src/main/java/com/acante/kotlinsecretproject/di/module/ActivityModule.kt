@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ActivityBindingModule(private val activity : Activity){
+class ActivityModule(private val activity : Activity){
 
     @Provides
     fun providsActivity():Activity{
