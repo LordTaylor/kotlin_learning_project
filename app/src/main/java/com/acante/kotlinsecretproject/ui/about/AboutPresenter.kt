@@ -1,8 +1,12 @@
 package com.acante.kotlinsecretproject.ui.about
 
-import com.acante.kotlinsecretproject.ui.base.BaseContact
+import com.acante.kotlinsecretproject.ui.base.BaseContract
 
 class AboutPresenter : AboutContract.Presenter {
+    override fun attache(view: AboutContract.View) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun showMessage() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -15,7 +19,4 @@ class AboutPresenter : AboutContract.Presenter {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun attache(view: BaseContact.View) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }

@@ -5,10 +5,9 @@ import com.acante.kotlinsecretproject.di.component.ApplicationComponent
 import com.acante.kotlinsecretproject.di.component.DaggerApplicationComponent
 
 
-class BaseApplication : Application()
-{
+class BaseApplication : Application() {
 
-    lateinit var component:ApplicationComponent
+    lateinit var component: ApplicationComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -20,16 +19,16 @@ class BaseApplication : Application()
 
     private fun setup() {
         component = DaggerApplicationComponent.create()
-                component.inject(this)
+        component.inject(this)
 
     }
 
-    fun getApplicationComponent():ApplicationComponent{
+    fun getApplicationComponent(): ApplicationComponent {
         return component
     }
 
-    companion object{
-        lateinit var instance : BaseApplication private set
+    companion object {
+        lateinit var instance: BaseApplication private set
     }
 
 }

@@ -5,7 +5,8 @@ import com.acante.kotlinsecretproject.repo.model.DetailsViewModel
 import com.acante.kotlinsecretproject.repo.model.MovieData
 import com.acante.kotlinsecretproject.repo.model.Post
 import com.acante.kotlinsecretproject.repo.api.ApiServiceInterface
-import com.acante.kotlinsecretproject.ui.base.BaseContact
+import com.acante.kotlinsecretproject.ui.base.BaseContract
+import com.acante.kotlinsecretproject.ui.main.MainContract
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -19,15 +20,15 @@ class ListPresenter : ListContract.Presenter {
 
     private lateinit var view: ListContract.View
 
-    override fun loadDalta() {
+    override fun loadData() {
         var subscribe = api.getData().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                view.showProggres(false)
+                view.showProgress(false)
                 view.loadDataSuccsess(it!!)
             }, {
                 Log.d(TAG, it.message)
-                view.showProggres(false)
+                view.showProgress(false)
                 view.showErrorMessage(it.localizedMessage)
             })
     }
@@ -48,8 +49,8 @@ class ListPresenter : ListContract.Presenter {
         subscription.clear()
     }
 
-    override fun attache(view: BaseContact.View) {
-        this.view = view as ListContract.View
+    override fun attache(view: ListContract.View) {
+        this.view = view
     }
 
     private fun createDetalView(movieData: List<MovieData>):DetailsViewModel{

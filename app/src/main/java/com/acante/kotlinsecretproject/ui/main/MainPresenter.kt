@@ -1,6 +1,6 @@
 package com.acante.kotlinsecretproject.ui.main
 
-import com.acante.kotlinsecretproject.ui.base.BaseContact
+import com.acante.kotlinsecretproject.ui.base.BaseContract
 import io.reactivex.disposables.CompositeDisposable
 
 class MainPresenter : MainContract.Presenter {
@@ -21,7 +21,7 @@ class MainPresenter : MainContract.Presenter {
         subscription.clear()
     }
 
-    override fun attache(view: BaseContact.View) {
-        this.view = view as MainContract.View
+    override fun attache(view: MainContract.View) {
+        this.view = view
     }
 }

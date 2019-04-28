@@ -1,14 +1,14 @@
 package com.acante.kotlinsecretproject.ui.about
 
-import com.acante.kotlinsecretproject.ui.base.BaseContact
+import com.acante.kotlinsecretproject.ui.base.BaseContract
 
 class AboutContract {
-    interface View:BaseContact.View{
+    interface View:BaseContract.View{
         fun loadMessageSuccess(message:String)
         fun showProggres(shw:Boolean)
     }
 
-    interface Presenter:BaseContact.Presenter<View>{
+    interface Presenter:BaseContract.Presenter<View>{
         fun showMessage()
     }
 }
