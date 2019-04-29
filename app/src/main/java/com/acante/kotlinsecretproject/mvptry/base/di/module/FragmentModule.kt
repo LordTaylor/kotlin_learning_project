@@ -1,6 +1,6 @@
 package com.acante.kotlinsecretproject.mvptry.base.di.module
 
-import com.acante.kotlinsecretproject.repo.rest.RequestInterface
+import com.acante.kotlinsecretproject.api.RequestInterface
 import com.acante.kotlinsecretproject.mvptry.base.ui.about.AboutContract
 import com.acante.kotlinsecretproject.mvptry.base.ui.about.AboutPresenter
 import com.acante.kotlinsecretproject.mvptry.base.ui.list.ListContract
@@ -22,7 +22,7 @@ class FragmentModule  {
     }
 
     @Provides
-    fun provideRequestInterface():RequestInterface{
+    fun provideRequestInterface(): RequestInterface {
         return RequestInterface.create()
     }
 }

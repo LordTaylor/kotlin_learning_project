@@ -3,4 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="nowyTaki1">#DDC700FF</color>
+    <color name="nowyTaki2">#DD00FF92</color>
+    <color name="nowyTaki3">#DDFFC600</color>
 </resources>

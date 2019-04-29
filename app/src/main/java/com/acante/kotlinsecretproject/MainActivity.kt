@@ -2,29 +2,14 @@ package com.acante.kotlinsecretproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.acante.kotlinsecretproject.mvptry.base.BaseApplication
-import com.acante.kotlinsecretproject.mvptry.base.di.component.ApplicationComponent
-import com.acante.kotlinsecretproject.di.component.DaggerApplicationComponent
-import com.acante.kotlinsecretproject.mvptry.base.di.module.ActivityBindingModule
 import com.acante.kotlinsecretproject.repo.model.MovieData
-import com.acante.kotlinsecretproject.repo.rest.RequestInterface
 import com.acante.kotlinsecretproject.mvptry.base.ui.base.BaseContact
-import com.acante.kotlinsecretproject.mvptry.base.ui.main.MainContract
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Inject
+import com.acante.kotlinsecretproject.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity(), BaseContact.View {
 
@@ -33,6 +18,8 @@ class MainActivity : AppCompatActivity(), BaseContact.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        supportFragmentManager.beginTransaction().replace(R.id.container_view,MainFragment()).commit()
 
         injectDependency()
 
@@ -70,40 +57,5 @@ class MainActivity : AppCompatActivity(), BaseContact.View {
 
     }
 
-    inner class MovieAdapter : RecyclerView.Adapter<MovieAdapter.DataViewHolder>() {
-        private val movieList: MutableList<MovieData> = mutableListOf()
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
-            return DataViewHolder(layoutInflater.inflate(R.layout.item_view, parent, false))
-        }
 
-        override fun getItemCount(): Int {
-            return movieList.size
-        }
-
-        override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-            holder.onBind(movieList[position])
-        }
-
-        fun setMovies(data: List<MovieData>) {
-            movieList.addAll(data)
-            notifyDataSetChanged()
-        }
-
-        inner class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            var title: TextView = itemView.findViewById(R.id.movie_title)
-            var movieCategory: TextView = itemView.findViewById(R.id.movie_description)
-            var movieAvatar: ImageView = itemView.findViewById(R.id.movie_avatar)
-
-            fun onBind(item: MovieData) {
-
-                title.text = item.title
-                movieCategory.text = item.year
-//                Picasso.get().load(item.poster).into(movieAvatar)
-
-            }
-
-
-        }
-
-    }
 }

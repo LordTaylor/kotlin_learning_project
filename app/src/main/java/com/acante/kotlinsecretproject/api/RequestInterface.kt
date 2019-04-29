@@ -1,4 +1,4 @@
-package com.acante.kotlinsecretproject.repo.rest
+package com.acante.kotlinsecretproject.api
 
 import com.acante.kotlinsecretproject.repo.model.MovieData
 import io.reactivex.Observable
@@ -20,7 +20,7 @@ interface RequestInterface {
     fun getRepo(@Path("owner") owner: String, @Path("name") name: String): Single<Repo>
 
     companion object Factory{
-        fun create():RequestInterface{
+        fun create(): RequestInterface {
             val retrofit = retrofit2.Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())

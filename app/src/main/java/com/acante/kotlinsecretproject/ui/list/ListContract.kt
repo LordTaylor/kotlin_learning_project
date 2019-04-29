@@ -1,9 +1,9 @@
-package com.acante.kotlinsecretproject.ui.listcontract
+package com.acante.kotlinsecretproject.ui.list
 
 import com.acante.kotlinsecretproject.ui.base.BaseCotract
 
 interface ListContract{
-    interface presenter:BaseCotract.Presenter<View>{
+    interface Presenter:BaseCotract.Presenter<View>{
         fun loadData()
 
     }
