@@ -2,16 +2,9 @@ package com.acante.kotlinsecretproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.acante.kotlinsecretproject.repo.model.MovieData
-import com.acante.kotlinsecretproject.mvptry.base.ui.base.BaseContact
 import com.acante.kotlinsecretproject.ui.main.MainFragment
 
-class MainActivity : AppCompatActivity(), BaseContact.View {
+class MainActivity : AppCompatActivity() {
 
     val TAG: String = "MainActivity"
 
