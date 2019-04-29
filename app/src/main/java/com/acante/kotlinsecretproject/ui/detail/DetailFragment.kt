@@ -1,4 +1,4 @@
-package com.acante.kotlinsecretproject.ui.main
+package com.acante.kotlinsecretproject.ui.detail
 
 
 import android.os.Bundle
@@ -18,14 +18,11 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class MainFragment : Fragment() {
+class DetailFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 
 

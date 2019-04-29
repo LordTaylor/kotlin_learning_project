@@ -1,10 +1,17 @@
 package com.acante.kotlinsecretproject
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.acante.kotlinsecretproject.ui.main.MainFragment
+import androidx.appcompat.app.AppCompatActivity
+import com.acante.kotlinsecretproject.ui.base.BaseActivity
+import com.acante.kotlinsecretproject.ui.detail.DetailFragment
+import com.acante.kotlinsecretproject.ui.list.MovieListFragment
+import com.acante.kotlinsecretproject.ui.main.MainContract
+import com.acante.kotlinsecretproject.ui.main.MainPresenter
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainContract.View {
+
+
+    lateinit var presenter:MainPresenter
 
     val TAG: String = "MainActivity"
 
@@ -12,7 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().replace(R.id.container_view,MainFragment()).commit()
+        presenter = MainPresenter()
+        presenter.attache(this)
 
         injectDependency()
 
@@ -51,4 +59,15 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun showListFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.container_view,
+            MovieListFragment()
+        ).commit()
+    }
+
+    override fun showDetailFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.container_view,
+            DetailFragment()
+        ).commit()
+    }
 }

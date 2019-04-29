@@ -6,5 +6,6 @@ interface MainContract {
     interface Presenter: BaseCotract.Presenter<View>
     interface View : BaseCotract.View{
         fun showListFragment()
+        fun showDetailFragment()
     }
 }
