@@ -1,15 +1,10 @@
 package com.acante.kotlinsecretproject.ui.main
 
-import com.acante.kotlinsecretproject.ui.base.BaseContact
+import com.acante.kotlinsecretproject.ui.base.BaseCotract
 
-class MainContract {
-
-    interface View:BaseContact.View{
-        fun showAboutFragment()
+interface MainContract {
+    interface Presenter: BaseCotract.Presenter<View>
+    interface View : BaseCotract.View{
         fun showListFragment()
-    }
-
-    interface Presenter:BaseContact.Presenter<MainContract.View>{
-        fun onDrawerOptionAboutClick()
     }
 }

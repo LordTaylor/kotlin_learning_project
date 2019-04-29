@@ -1,4 +1,4 @@
-package com.acante.kotlinsecretproject.model
+package com.acante.kotlinsecretproject.mvptry.base.model
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import com.acante.kotlinsecretproject.R
 import kotlinx.android.synthetic.main.item_view.view.*
 import android.graphics.Color
 
-class DataAdapter(private val dataList : ArrayList<Android>, private val listener:Listener):RecyclerView.Adapter<DataAdapter.ViewHolder>() {
+class DataAdapter(private val dataList : ArrayList<Android>, private val listener: Listener):RecyclerView.Adapter<DataAdapter.ViewHolder>() {
 
     interface Listener {
 

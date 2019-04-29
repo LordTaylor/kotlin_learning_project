@@ -1,13 +1,13 @@
-package com.acante.kotlinsecretproject.di.module
+package com.acante.kotlinsecretproject.mvptry.base.di.module
 
 import android.app.Application
-import com.acante.kotlinsecretproject.base.BaseApplication
+import com.acante.kotlinsecretproject.mvptry.base.BaseApplication
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class ApplicationModule(private val baseApp:BaseApplication) {
+class ApplicationModule(private val baseApp: BaseApplication) {
 
     @Provides
     @Singleton

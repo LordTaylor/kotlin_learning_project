@@ -1,8 +1,8 @@
-package com.acante.kotlinsecretproject.di.module
+package com.acante.kotlinsecretproject.mvptry.base.di.module
 
 import android.app.Activity
-import com.acante.kotlinsecretproject.ui.main.MainContract
-import com.acante.kotlinsecretproject.ui.main.MainPresenter
+import com.acante.kotlinsecretproject.mvptry.base.ui.main.MainContract
+import com.acante.kotlinsecretproject.mvptry.base.ui.main.MainPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -15,7 +15,7 @@ class ActivityBindingModule(private val activity : Activity){
     }
 
     @Provides
-    fun providePresenter():MainContract.Presenter{
+    fun providePresenter(): MainContract.Presenter{
         return MainPresenter()
     }
 }

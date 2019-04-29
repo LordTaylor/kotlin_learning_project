@@ -1,11 +1,11 @@
-package com.acante.kotlinsecretproject.ui.list
+package com.acante.kotlinsecretproject.mvptry.base.ui.list
 
 import android.util.Log
 import com.acante.kotlinsecretproject.repo.model.DetailsViewModel
 import com.acante.kotlinsecretproject.repo.model.MovieData
 import com.acante.kotlinsecretproject.repo.model.Post
 import com.acante.kotlinsecretproject.repo.rest.RequestInterface
-import com.acante.kotlinsecretproject.ui.base.BaseContact
+import com.acante.kotlinsecretproject.mvptry.base.ui.base.BaseContact
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

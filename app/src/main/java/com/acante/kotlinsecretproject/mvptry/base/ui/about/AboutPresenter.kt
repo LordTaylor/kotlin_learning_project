@@ -1,6 +1,6 @@
-package com.acante.kotlinsecretproject.ui.about
+package com.acante.kotlinsecretproject.mvptry.base.ui.about
 
-import com.acante.kotlinsecretproject.ui.base.BaseContact
+import com.acante.kotlinsecretproject.mvptry.base.ui.base.BaseContact
 
 class AboutPresenter : AboutContract.Presenter {
     override fun showMessage() {

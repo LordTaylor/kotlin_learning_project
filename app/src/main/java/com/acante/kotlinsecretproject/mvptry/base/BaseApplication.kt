@@ -1,14 +1,14 @@
-package com.acante.kotlinsecretproject.base
+package com.acante.kotlinsecretproject.mvptry.base
 
 import android.app.Application
-import com.acante.kotlinsecretproject.di.component.ApplicationComponent
+import com.acante.kotlinsecretproject.mvptry.base.di.component.ApplicationComponent
 import com.acante.kotlinsecretproject.di.component.DaggerApplicationComponent
 
 
 class BaseApplication : Application()
 {
 
-    lateinit var component:ApplicationComponent
+    lateinit var component: ApplicationComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -24,7 +24,7 @@ class BaseApplication : Application()
 
     }
 
-    fun getApplicationComponent():ApplicationComponent{
+    fun getApplicationComponent(): ApplicationComponent {
         return component
     }
 

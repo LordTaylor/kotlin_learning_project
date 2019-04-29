@@ -1,4 +1,4 @@
-package com.acante.kotlinsecretproject.ui.base
+package com.acante.kotlinsecretproject.mvptry.base.ui.base
 
 
 class BaseContact {

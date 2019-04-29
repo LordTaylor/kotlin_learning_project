@@ -1,13 +1,13 @@
-package com.acante.kotlinsecretproject.ui.main
+package com.acante.kotlinsecretproject.mvptry.base.ui.main
 
-import com.acante.kotlinsecretproject.ui.base.BaseContact
+import com.acante.kotlinsecretproject.mvptry.base.ui.base.BaseContact
 import io.reactivex.disposables.CompositeDisposable
 
 class MainPresenter : MainContract.Presenter {
 
     private val  subscription = CompositeDisposable()
 
-    private lateinit var view:MainContract.View
+    private lateinit var view: MainContract.View
 
     override fun onDrawerOptionAboutClick() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

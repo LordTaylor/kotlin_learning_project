@@ -10,14 +10,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.acante.kotlinsecretproject.base.BaseApplication
-import com.acante.kotlinsecretproject.di.component.ApplicationComponent
+import com.acante.kotlinsecretproject.mvptry.base.BaseApplication
+import com.acante.kotlinsecretproject.mvptry.base.di.component.ApplicationComponent
 import com.acante.kotlinsecretproject.di.component.DaggerApplicationComponent
-import com.acante.kotlinsecretproject.di.module.ActivityBindingModule
+import com.acante.kotlinsecretproject.mvptry.base.di.module.ActivityBindingModule
 import com.acante.kotlinsecretproject.repo.model.MovieData
 import com.acante.kotlinsecretproject.repo.rest.RequestInterface
-import com.acante.kotlinsecretproject.ui.base.BaseContact
-import com.acante.kotlinsecretproject.ui.main.MainContract
+import com.acante.kotlinsecretproject.mvptry.base.ui.base.BaseContact
+import com.acante.kotlinsecretproject.mvptry.base.ui.main.MainContract
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,23 +28,14 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), BaseContact.View {
 
-    private val TAG: String = "MainActivity"
-
-    @Inject
-    lateinit var presenter: MainContract.Presenter
-
-
-    lateinit var containerRecycler: RecyclerView
-    private lateinit var movieAdapter: MovieAdapter
+    val TAG: String = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        containerRecycler = findViewById(R.id.container_view)
 
         injectDependency()
 
-        presenter.attache(this)
 //        var applicationComponent:ApplicationComponent = DaggerApplicationComponent.builder().build();
 
 //        movieAdapter=MovieAdapter()
@@ -76,9 +67,7 @@ class MainActivity : AppCompatActivity(), BaseContact.View {
     }
 
     private fun injectDependency() {
-        val activityComponent = DaggerApplicationComponent.builder().activityBindingModule(ActivityBindingModule(this)).build()
-//        activityComponent.buildActivity(this)
-//        activityComponent.inject(this.application as BaseApplication)
+
     }
 
     inner class MovieAdapter : RecyclerView.Adapter<MovieAdapter.DataViewHolder>() {

@@ -1,4 +1,4 @@
-package com.acante.kotlinsecretproject.model
+package com.acante.kotlinsecretproject.mvptry.base.model
 
 import com.acante.kotlinsecretproject.repo.model.MovieData
 
