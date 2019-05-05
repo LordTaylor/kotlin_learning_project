@@ -7,4 +7,11 @@
     <string name="login_hint_text_login">Login</string>
     <string name="login_hint_text_password">Password</string>
     <string name="login_text_view_register">Register</string>
+
+    <string name="register_edit_text_nick_hint">Nick name</string>
+    <string name="register_edit_text_password_hint">Password</string>
+    <string name="register_edit_text_confirm_password_hint">Confirm Password</string>
+    <string name="register_edit_text_email_hint">Email</string>
+    <string name="register_button_regisstre">Register</string>
+    <string name="register_login">Login</string>
 </resources>

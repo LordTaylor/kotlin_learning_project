@@ -8,6 +8,6 @@ interface LoginContract : BaseCotract {
 
     }
     interface Presenter : BaseCotract.Presenter<View>{
-
+            fun login()
     }
 }

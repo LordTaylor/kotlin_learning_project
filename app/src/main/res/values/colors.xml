@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="nowyTaki1">#DDC700FF</color>
+    <color name="colorPrimary">#FF3C46</color>
+    <color name="colorPrimaryDark">#A7161F</color>
+    <color name="colorAccent">#6F73CA</color>
+    <color name="colorPrimaryLight">#FF878B</color>
     <color name="nowyTaki2">#DD00FF92</color>
     <color name="nowyTaki3">#DDFFC600</color>
 </resources>
