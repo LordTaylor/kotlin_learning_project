@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -46,6 +48,8 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
 
+//    implementation 'com.google.android.gms:play-services-base:16.0.1'
+
 
     implementation "org.koin:koin-androidx-scope:$koin_version"
 // Koin AndroidX ViewModel feature
@@ -65,8 +69,9 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
-//    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-//
-//    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
-//    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+    //firebase dependency
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-auth:16.2.1'
+
+
 }

@@ -2,16 +2,16 @@ package com.acante.kotlinsecretproject
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.acante.kotlinsecretproject.ui.base.BaseActivity
 import com.acante.kotlinsecretproject.ui.detail.DetailFragment
-import com.acante.kotlinsecretproject.ui.list.MovieListFragment
+import com.acante.kotlinsecretproject.ui.list.ListFragment
+import com.acante.kotlinsecretproject.ui.login.LoginFragment
 import com.acante.kotlinsecretproject.ui.main.MainContract
 import com.acante.kotlinsecretproject.ui.main.MainPresenter
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
 
-    lateinit var presenter:MainPresenter
+    lateinit var presenter: MainPresenter
 
     val TAG: String = "MainActivity"
 
@@ -24,34 +24,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         injectDependency()
 
-//        var applicationComponent:ApplicationComponent = DaggerApplicationComponent.builder().build();
-
-//        movieAdapter=MovieAdapter()
-//        container_view.layoutManager = LinearLayoutManager(this)
-//        container_view.adapter = movieAdapter
-//
-//        val retrofit: Retrofit = Retrofit.Builder()
-//            .baseUrl(BASE_URL)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//            .build()
-//
-//        val movieData = retrofit.create(RequestInterface::class.java)
-//        movieData.getData()
-//            .subscribeOn(Schedulers.io())
-//            .unsubscribeOn(Schedulers.computation())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(
-//                {
-////                    var data:List<MovieData> = it
-//                    movieAdapter.setMovies(it!!)
-//
-//                }, {
-//                    Log.d(TAG,it.message);
-//                    Toast.makeText(applicationContext,it.message,Toast.LENGTH_LONG).show()
-//                }
-//            )
-
     }
 
     private fun injectDependency() {
@@ -60,14 +32,28 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
 
     override fun showListFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.container_view,
-            MovieListFragment()
-        ).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.container_view,
+                ListFragment()
+            )
+            .commit()
     }
 
     override fun showDetailFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.container_view,
-            DetailFragment()
-        ).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.container_view,
+                DetailFragment()
+            )
+            .commit()
+    }
+    override fun showLoginFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.container_view,
+                LoginFragment()
+            )
+            .commit()
     }
 }

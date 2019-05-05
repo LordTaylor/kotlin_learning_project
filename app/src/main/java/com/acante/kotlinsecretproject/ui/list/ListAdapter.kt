@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.acante.kotlinsecretproject.R
 import com.acante.kotlinsecretproject.repo.model.MovieData
 
- class ListAdapter(val context: Context) : RecyclerView.Adapter<ListAdapter.DataViewHolder>() {
+ class ListAdapter(val context: Context,val listener:OnClickListener) : RecyclerView.Adapter<ListAdapter.DataViewHolder>() {
     private val movieList: MutableList<MovieData> = mutableListOf()
 //     lateinit var context:Context
      override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
@@ -22,7 +22,8 @@ import com.acante.kotlinsecretproject.repo.model.MovieData
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-        holder.onBind(movieList[position])
+        holder.onBind(movieList[position],listener)
+        holder.movieAvatar.setOnClickListener(listener)
     }
 
     fun setMovies(data: List<MovieData>) {
@@ -34,16 +35,21 @@ import com.acante.kotlinsecretproject.repo.model.MovieData
         var title: TextView = itemView.findViewById(R.id.movie_title)
         var movieCategory: TextView = itemView.findViewById(R.id.movie_description)
         var movieAvatar: ImageView = itemView.findViewById(R.id.movie_avatar)
+        lateinit var listener:ListAdapter.OnClickListener
 
-        fun onBind(item: MovieData) {
-
+        fun onBind(item: MovieData,listener: OnClickListener) {
             title.text = item.title
             movieCategory.text = item.year
+            this.listener= listener
 //                Picasso.get().load(item.poster).into(movieAvatar)
-
         }
-
 
     }
 
-}
+     interface OnClickListener : View.OnClickListener{
+
+         override fun onClick(view:View)
+
+     }
+
+ }

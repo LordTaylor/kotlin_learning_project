@@ -4,10 +4,14 @@ import com.acante.kotlinsecretproject.repo.model.MovieData
 import io.reactivex.Observable
 import retrofit2.http.GET
 import com.acante.kotlinsecretproject.repo.model.Repo
+import com.acante.kotlinsecretproject.repo.model.User
 import com.acante.kotlinsecretproject.utils.Constance
+import io.reactivex.Flowable
 import io.reactivex.Single
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 
@@ -30,5 +34,7 @@ interface RequestInterface {
         }
 
     }
+    @POST("/")
+    fun postUser(@Body movieData: MovieData):Single<MovieData>
 
 }

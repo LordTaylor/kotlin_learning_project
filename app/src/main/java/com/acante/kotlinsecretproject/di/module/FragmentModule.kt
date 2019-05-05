@@ -4,24 +4,21 @@ import com.acante.kotlinsecretproject.ui.detail.DetailContract
 import com.acante.kotlinsecretproject.ui.detail.DetailPresenter
 import com.acante.kotlinsecretproject.ui.list.ListContract
 import com.acante.kotlinsecretproject.ui.list.ListPresenter
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 @Module
- class FragmentModule {
+class FragmentModule {
 
     @Provides
-     fun provideListPresenter(view:ListContract.View):ListPresenter{
+    fun provideListPresenter(view: ListContract.View): ListContract.Presenter{
         var presenter = ListPresenter()
-        presenter.attache(view)
         return presenter
     }
 
     @Provides
-      fun provideDetalPresenter(view:DetailContract.View):DetailPresenter{
+    fun provideDetalPresenter(view: DetailContract.View): DetailContract.Presenter {
         var presenter = DetailPresenter()
-        presenter.attache(view)
         return presenter
 
     }
