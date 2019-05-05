@@ -4,6 +4,6 @@ class MainPresenter: MainContract.Presenter{
     lateinit var view: MainContract.View
     override fun attache(view: MainContract.View) {
         this.view = view
-        view.showLoginFragment()
+        view.showRegistreFragment()
     }
 }

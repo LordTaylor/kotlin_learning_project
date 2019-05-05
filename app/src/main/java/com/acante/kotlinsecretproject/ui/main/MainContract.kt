@@ -8,5 +8,6 @@ interface MainContract {
         fun showLoginFragment()
         fun showListFragment()
         fun showDetailFragment()
+        fun showRegistreFragment()
     }
 }

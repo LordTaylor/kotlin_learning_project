@@ -7,6 +7,7 @@ import com.acante.kotlinsecretproject.ui.list.ListFragment
 import com.acante.kotlinsecretproject.ui.login.LoginFragment
 import com.acante.kotlinsecretproject.ui.main.MainContract
 import com.acante.kotlinsecretproject.ui.main.MainPresenter
+import com.acante.kotlinsecretproject.ui.register.RegisterFragment
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
@@ -53,6 +54,15 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             .replace(
                 R.id.container_view,
                 LoginFragment()
+            )
+            .commit()
+    }
+
+    override fun showRegistreFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.container_view,
+                RegisterFragment()
             )
             .commit()
     }

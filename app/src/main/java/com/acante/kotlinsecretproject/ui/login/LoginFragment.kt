@@ -9,6 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.acante.kotlinsecretproject.R
+import com.acante.kotlinsecretproject.ui.list.ListFragment
+import com.acante.kotlinsecretproject.ui.register.RegisterFragment
+import com.google.firebase.auth.FirebaseUser
+import kotlinx.android.synthetic.main.fragment_login.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,13 +34,22 @@ class LoginFragment : Fragment() , LoginContract.View{
     ): View? {
         // Inflate the layout for this fragment
         rootView =  inflater.inflate(R.layout.fragment_login, container, false)
+
         return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter = LoginPresenter()
+        presenter = LoginPresenter(context!!)
         presenter.attache(this)
+        login_textView_register.setOnClickListener {
+            showRegisterFragment()
+        }
+        login_button_login.setOnClickListener {
+            var email = login_editText_email.text.toString()
+            var pass = login_editText_password.text.toString()
+            presenter.login(email,pass)
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -47,5 +60,23 @@ class LoginFragment : Fragment() , LoginContract.View{
     override fun onDetach() {
         super.onDetach()
 
+    }
+
+    override fun showListFragment(user: FirebaseUser) {
+        fragmentManager!!.beginTransaction()
+            .replace(
+                R.id.container_view,
+                ListFragment()
+            )
+            .commit()
+    }
+
+    override fun showRegisterFragment() {
+        fragmentManager!!.beginTransaction()
+            .replace(
+                R.id.container_view,
+                RegisterFragment()
+            )
+            .commit()
     }
 }
