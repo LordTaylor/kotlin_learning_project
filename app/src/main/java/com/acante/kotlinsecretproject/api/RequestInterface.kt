@@ -38,4 +38,8 @@ interface RequestInterface {
     @POST("/oauth/token?grant_type=password&username=user&password=pass")
     fun postLoginTo(@Query("user")user:String="user",@Query("pass")pass:String="user"):Observable<String>
 
+    @POST("/oauth/token?grant_type=password&username=user&password=pass")
+    @FormUrlEncoded
+    fun getTocken(@Field("client_id")client_id:String,@Field("secret")secret:String="secret",@Query("user")user:String="user",@Query("pass")pass:String="pass"):Observable<TokenResponse>
+
 }

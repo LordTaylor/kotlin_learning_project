@@ -64,6 +64,14 @@ class ListPresenter @Inject constructor() : ListContract.Presenter {
                     Log.d(ListPresenter.TAG, "error message : $it.localizedMessage")
                 }
             )
+        api.getTocken("my-trusted-client").subscribeOn(Schedulers.io())
+            .unsubscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG,"tocken:  $it")
+            },{
+                Log.d(TAG,"tocken:  ${it.localizedMessage}")
+            })
     }
 
     override fun attache(view: ListContract.View) {

@@ -46,7 +46,7 @@ class ListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListener 
         initView()
         dependencyInjection()
         presenter.attache(this)
-        presenter.sendData(MovieData(1,"a","a"))
+        presenter.loadData()//sendData(MovieData(1,"a","a"))
 //        ViewModelProvider.
 
     }
