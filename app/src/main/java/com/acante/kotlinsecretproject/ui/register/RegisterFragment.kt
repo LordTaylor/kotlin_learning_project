@@ -1,19 +1,12 @@
 package com.acante.kotlinsecretproject.ui.register
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.acante.kotlinsecretproject.R
-import com.acante.kotlinsecretproject.ui.list.ListFragment
 import com.acante.kotlinsecretproject.ui.login.LoginFragment
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_register.*
 
 class RegisterFragment : Fragment(), RegisterContract.View {
@@ -29,6 +22,10 @@ class RegisterFragment : Fragment(), RegisterContract.View {
         super.onViewCreated(view, savedInstanceState)
         presenter = RegisterPresenter(context!!)
         presenter.attache(this)
+        initViews()
+    }
+    private fun initViews(){
+        activity!!.setTitle(R.string.register_fragment_title)
         register_textView_login.setOnClickListener {
             showLoginFragment()
         }
@@ -47,7 +44,11 @@ class RegisterFragment : Fragment(), RegisterContract.View {
     }
 
     override fun showLoginFragment() {
+
+        val edt_email = register_editText_email
+
         fragmentManager!!.beginTransaction()
+            .setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right)
             .replace(
                 R.id.container_view,
                 LoginFragment()

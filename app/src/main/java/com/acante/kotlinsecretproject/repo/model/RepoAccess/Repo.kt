@@ -1,4 +1,4 @@
-package com.acante.kotlinsecretproject.repo.model
+package com.acante.kotlinsecretproject.repo.model.RepoAccess
 
 import javax.inject.Inject
 

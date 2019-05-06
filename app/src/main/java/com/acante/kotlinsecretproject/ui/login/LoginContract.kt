@@ -9,6 +9,7 @@ interface LoginContract : BaseCotract {
     interface View : BaseCotract.View{
         fun showListFragment(user: FirebaseUser)
         fun showRegisterFragment()
+        fun setEmail(email:String="")
     }
     interface Presenter : BaseCotract.Presenter<View>{
             fun login(email:String,password:String)

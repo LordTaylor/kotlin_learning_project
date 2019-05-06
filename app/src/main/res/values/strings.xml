@@ -14,4 +14,10 @@
     <string name="register_edit_text_email_hint">Email</string>
     <string name="register_button_regisstre">Register</string>
     <string name="register_login">Login</string>
+
+    <string name="list_fragment_title">Favorite</string>
+    <string name="login_fragment_title">Login</string>
+    <string name="register_fragment_title">Register</string>
+    <string name="edit_item_fragment_title">Edit</string>
+    <string name="create_item_fragment_title">Create item</string>
 </resources>

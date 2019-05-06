@@ -31,7 +31,10 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         detail_cancle.setOnClickListener(View.OnClickListener {
-            fragmentManager!!.beginTransaction().replace(R.id.container_view,ListFragment()).commit()
+            fragmentManager!!.beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left)
+                .replace(R.id.container_view,ListFragment())
+                .commit()
             Toast.makeText(context,"Detail view on click",Toast.LENGTH_LONG).show()
         })
 

@@ -33,9 +33,11 @@ class ListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListener 
     }
 
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_list, container, false)
         rootView.setOnClickListener(this)
+
         return rootView
     }
 
@@ -50,6 +52,8 @@ class ListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListener 
     }
 
     private fun initView() {
+        activity!!.setTitle(R.string.list_fragment_title)
+        list_botomNavigation.inflateMenu(R.menu.bottom_navigation)
         list_container.setLayoutManager(LinearLayoutManager(context))
         listAdapter = ListAdapter(this!!.context!!, this)
         list_container.adapter = listAdapter
@@ -75,5 +79,9 @@ class ListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListener 
         fragmentManager!!.beginTransaction()
             .replace(R.id.container_view, DetailFragment())
             .commit()
+    }
+
+    override fun setTitle(title: String) {
+        activity!!.setTitle(title)
     }
 }

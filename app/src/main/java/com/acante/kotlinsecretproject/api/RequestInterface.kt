@@ -3,10 +3,8 @@ package com.acante.kotlinsecretproject.api
 import com.acante.kotlinsecretproject.repo.model.MovieData
 import io.reactivex.Observable
 import retrofit2.http.GET
-import com.acante.kotlinsecretproject.repo.model.Repo
-import com.acante.kotlinsecretproject.repo.model.User
+import com.acante.kotlinsecretproject.repo.model.RepoAccess.Repo
 import com.acante.kotlinsecretproject.utils.Constance
-import io.reactivex.Flowable
 import io.reactivex.Single
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -36,5 +34,8 @@ interface RequestInterface {
     }
     @POST("/")
     fun postUser(@Body movieData: MovieData):Single<MovieData>
+
+    @GET("/private?access_token={token}")
+    fun getPrivateData(@Path("token")token:String):Observable<String>
 
 }

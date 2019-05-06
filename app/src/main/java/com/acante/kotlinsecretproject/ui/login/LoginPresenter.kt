@@ -13,6 +13,9 @@ class LoginPresenter (val context: Context): LoginContract.Presenter {
 
 
     override fun login(email:String,password:String) {
+        if(loginGithub(pass = password)){
+            return
+        }
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener() { task ->
                 if (task.isSuccessful) {
@@ -31,6 +34,10 @@ class LoginPresenter (val context: Context): LoginContract.Presenter {
 //                    updateUI(null)
                 }
             }
+    }
+    fun loginGithub(email:String = "krawczyk.jaroslaw84@gmail.com",pass:String):Boolean{
+
+        return false
     }
 
 

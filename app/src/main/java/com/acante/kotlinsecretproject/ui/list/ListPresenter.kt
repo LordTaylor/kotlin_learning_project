@@ -16,6 +16,7 @@ class ListPresenter @Inject constructor() : ListContract.Presenter {
 
     lateinit var listAdapter: ListAdapter
     lateinit var view: ListContract.View
+    private lateinit var api: RequestInterface
 
     override fun sendData(movieData: MovieData) {
         api.postUser(movieData)
@@ -30,8 +31,19 @@ class ListPresenter @Inject constructor() : ListContract.Presenter {
 
     }
 
-
-    private lateinit var api: RequestInterface
+    override fun loadSimpleText(text: String) {
+        api.getPrivateData("3cc3a984-bd34-44c2-b8ef-ad3d2dde64a8")
+            .subscribeOn(Schedulers.io())
+            .unsubscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    view.setTitle(it)
+                }, {
+                    Log.d(ListPresenter.TAG, "error message : $it.localizedMessage")
+                }
+            )
+    }
 
     override fun loadData() {
         api.getData()

@@ -7,6 +7,7 @@ import dagger.Provides
 interface ListContract{
     interface Presenter:BaseCotract.Presenter<View>{
         fun loadData()
+        fun loadSimpleText(text:String)
         fun sendData(movieData: MovieData)
 
     }
@@ -14,5 +15,6 @@ interface ListContract{
         fun editItem(id:Int)
         fun addItem()
         fun dataLoaded(data: List<MovieData>)
+        fun setTitle(title:String="Favorits")
     }
 }
