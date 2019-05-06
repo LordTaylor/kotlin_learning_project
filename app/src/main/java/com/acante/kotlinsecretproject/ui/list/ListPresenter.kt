@@ -19,16 +19,23 @@ class ListPresenter @Inject constructor() : ListContract.Presenter {
     private lateinit var api: RequestInterface
 
     override fun sendData(movieData: MovieData) {
-        api.postUser(movieData)
-            .subscribeOn(Schedulers.io())
+//        api.postUser(movieData)
+//            .subscribeOn(Schedulers.io())
+//            .unsubscribeOn(Schedulers.computation())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({
+//                Log.d(TAG, "message : $it")
+//            }, {
+//                Log.d(TAG, "Message: ${it.localizedMessage}")
+//            })
+        api.postLoginTo().subscribeOn(Schedulers.io())
             .unsubscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d(TAG, "message : $it")
-            }, {
-                Log.d(TAG, "Message: ${it.localizedMessage}")
+                view.setTitle(it)
+            },{
+                Log.d(ListPresenter.TAG, "error message : $it.localizedMessage")
             })
-
     }
 
     override fun loadSimpleText(text: String) {
