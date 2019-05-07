@@ -44,9 +44,6 @@ class RegisterFragment : Fragment(), RegisterContract.View {
     }
 
     override fun showLoginFragment() {
-
-        val edt_email = register_editText_email
-
         fragmentManager!!.beginTransaction()
             .setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right)
             .replace(

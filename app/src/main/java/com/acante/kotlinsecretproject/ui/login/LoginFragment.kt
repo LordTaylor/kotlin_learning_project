@@ -1,13 +1,16 @@
 package com.acante.kotlinsecretproject.ui.login
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.acante.kotlinsecretproject.R
+import com.acante.kotlinsecretproject.api.Session
 import com.acante.kotlinsecretproject.ui.list.ListFragment
 import com.acante.kotlinsecretproject.ui.register.RegisterFragment
 import com.acante.kotlinsecretproject.utils.Constance.Companion.PREF_NAME
@@ -49,21 +52,37 @@ class LoginFragment : Fragment(), LoginContract.View {
         super.onViewCreated(view, savedInstanceState)
         presenter = LoginPresenter(context!!)
         presenter.attache(this)
+
         initViews()
     }
 
     private fun initViews() {
         activity!!.setTitle(R.string.login_fragment_title)
+
         login_textView_register.setOnClickListener {
             showRegisterFragment()
         }
         login_button_login.setOnClickListener {
             var email = login_editText_email.text.toString()
             var pass = login_editText_password.text.toString()
-            presenter.login(email, pass)
+            if (isEmailValid(email) && !pass.isEmpty()) {
+                login_text_error.visibility=View.INVISIBLE
+                presenter.loginToRest(email, pass)
+            }else{
+                login_editText_email.setText(this.email)
+            }
         }
-        login_editText_email.setText(this.email)
+
     }
+
+    override fun showLoginErrorMessage() {
+        login_text_error.visibility=View.VISIBLE
+    }
+
+    private fun isEmailValid(email: String): Boolean {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -84,6 +103,20 @@ class LoginFragment : Fragment(), LoginContract.View {
             .replace(
                 R.id.container_view,
                 ListFragment()
+            )
+            .commit()
+    }
+
+    override fun showListFragment(session: Session) {
+        val sp = activity!!.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sp.edit().putString(USER_EMAIL, session.getSessionUser().email).commit()
+        val fragment = ListFragment.instance
+        fragment.setSession(session)
+        fragmentManager!!.beginTransaction()
+            .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+            .replace(
+                R.id.container_view,
+                fragment
             )
             .commit()
     }

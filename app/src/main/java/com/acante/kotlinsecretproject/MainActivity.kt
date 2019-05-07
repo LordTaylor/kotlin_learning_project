@@ -32,13 +32,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun getUserEmail(){
         val sp = getSharedPreferences(Constance.PREF_NAME, Context.MODE_PRIVATE)
         val name = sp.getString(Constance.USER_EMAIL,"")
-        showListFragment()
-//        if(name.trim().isEmpty()){
-//            showRegistreFragment()
-//            return
-//        }else{
-//            showLoginFragment(name)
-//        }
+        if(name.trim().isEmpty()){
+            showRegistreFragment()
+            return
+        }else{
+            showLoginFragment(name)
+        }
     }
 
     private fun injectDependency() {

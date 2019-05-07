@@ -7,6 +7,7 @@
     <string name="login_hint_text_login">Email</string>
     <string name="login_hint_text_password">Password</string>
     <string name="login_text_view_register">Register</string>
+    <string name="login_error_message">Login or Password is invalid</string>
 
     <string name="register_edit_text_nick_hint">Nick name</string>
     <string name="register_edit_text_password_hint">Password</string>

@@ -1,7 +1,9 @@
 package com.acante.kotlinsecretproject.ui.list
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.acante.kotlinsecretproject.api.RequestInterface
+import com.acante.kotlinsecretproject.api.Session
 import com.acante.kotlinsecretproject.repo.model.MovieData
 import com.acante.kotlinsecretproject.utils.Constance
 import dagger.Provides
@@ -17,29 +19,23 @@ class ListPresenter @Inject constructor() : ListContract.Presenter {
     lateinit var listAdapter: ListAdapter
     lateinit var view: ListContract.View
     private lateinit var api: RequestInterface
+    private lateinit var session: Session
 
     override fun sendData(movieData: MovieData) {
-//        api.postUser(movieData)
-//            .subscribeOn(Schedulers.io())
-//            .unsubscribeOn(Schedulers.computation())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({
-//                Log.d(TAG, "message : $it")
-//            }, {
-//                Log.d(TAG, "Message: ${it.localizedMessage}")
-//            })
-        api.postLoginTo().subscribeOn(Schedulers.io())
+        api.postUser(movieData)
+            .subscribeOn(Schedulers.io())
             .unsubscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                view.setTitle(it)
-            },{
-                Log.d(ListPresenter.TAG, "error message : $it.localizedMessage")
+                Log.d(TAG, "message : $it")
+            }, {
+                Log.d(TAG, "Message: ${it.localizedMessage}")
             })
     }
 
+    @SuppressLint("CheckResult")
     override fun loadSimpleText(text: String) {
-        api.getPrivateData("3cc3a984-bd34-44c2-b8ef-ad3d2dde64a8")
+        api.getPrivateData(session.getAuthentication(),token = session.tokenResponse.getAccessToken()!!)
             .subscribeOn(Schedulers.io())
             .unsubscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
@@ -47,7 +43,7 @@ class ListPresenter @Inject constructor() : ListContract.Presenter {
                 {
                     view.setTitle(it)
                 }, {
-                    Log.d(ListPresenter.TAG, "error message : $it.localizedMessage")
+                    Log.d(ListPresenter.TAG, "error message load simple text: ${(it.localizedMessage)}")
                 }
             )
     }
@@ -64,19 +60,15 @@ class ListPresenter @Inject constructor() : ListContract.Presenter {
                     Log.d(ListPresenter.TAG, "error message : $it.localizedMessage")
                 }
             )
-        api.getTocken("my-trusted-client").subscribeOn(Schedulers.io())
-            .unsubscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Log.d(TAG,"tocken:  $it")
-            },{
-                Log.d(TAG,"tocken:  ${it.localizedMessage}")
-            })
     }
 
     override fun attache(view: ListContract.View) {
         this.view = view
         api = RequestInterface.create()
+    }
+
+    override fun addSession(session: Session) {
+        this.session = session
     }
 
 
