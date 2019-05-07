@@ -17,5 +17,6 @@ interface ListContract{
         fun addItem()
         fun dataLoaded(data: List<MovieData>)
         fun setTitle(title:String="Favorits")
+        fun showDetailFragment(position:Int)
     }
 }

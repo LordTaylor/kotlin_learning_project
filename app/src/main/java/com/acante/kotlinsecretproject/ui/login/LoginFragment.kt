@@ -1,7 +1,6 @@
 package com.acante.kotlinsecretproject.ui.login
 
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -11,7 +10,7 @@ import android.view.ViewGroup
 
 import com.acante.kotlinsecretproject.R
 import com.acante.kotlinsecretproject.api.Session
-import com.acante.kotlinsecretproject.ui.list.ListFragment
+import com.acante.kotlinsecretproject.ui.list.MyListFragment
 import com.acante.kotlinsecretproject.ui.register.RegisterFragment
 import com.acante.kotlinsecretproject.utils.Constance.Companion.PREF_NAME
 import com.acante.kotlinsecretproject.utils.Constance.Companion.USER_EMAIL
@@ -34,7 +33,7 @@ class LoginFragment : Fragment(), LoginContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        instance = this
+//        INSTANCE = this
 
     }
 
@@ -102,7 +101,7 @@ class LoginFragment : Fragment(), LoginContract.View {
             .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
             .replace(
                 R.id.container_view,
-                ListFragment()
+                MyListFragment()
             )
             .commit()
     }
@@ -110,7 +109,7 @@ class LoginFragment : Fragment(), LoginContract.View {
     override fun showListFragment(session: Session) {
         val sp = activity!!.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         sp.edit().putString(USER_EMAIL, session.getSessionUser().email).commit()
-        val fragment = ListFragment.instance
+        val fragment = MyListFragment.INSTANCE
         fragment.setSession(session)
         fragmentManager!!.beginTransaction()
             .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)

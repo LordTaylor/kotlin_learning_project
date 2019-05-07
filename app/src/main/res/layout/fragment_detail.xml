@@ -6,7 +6,7 @@
                                                    android:layout_height="match_parent"
                                                    android:background="@color/colorPrimary">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragmentMy layout -->
     <TextView
             android:id="@+id/name_text"
             android:background="@drawable/drawable_round_edit_file"

@@ -3,16 +3,16 @@ package com.acante.kotlinsecretproject
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import com.acante.kotlinsecretproject.ui.base.BaseActivity
 import com.acante.kotlinsecretproject.ui.detail.DetailFragment
-import com.acante.kotlinsecretproject.ui.list.ListFragment
+import com.acante.kotlinsecretproject.ui.list.MyListFragment
 import com.acante.kotlinsecretproject.ui.login.LoginFragment
 import com.acante.kotlinsecretproject.ui.main.MainContract
 import com.acante.kotlinsecretproject.ui.main.MainPresenter
 import com.acante.kotlinsecretproject.ui.register.RegisterFragment
 import com.acante.kotlinsecretproject.utils.Constance
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : BaseActivity(), MainContract.View {
 
 
     lateinit var presenter: MainPresenter
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.container_view,
-                ListFragment()
+                MyListFragment()
             )
             .commit()
     }

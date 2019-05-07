@@ -15,7 +15,7 @@ import com.acante.kotlinsecretproject.ui.detail.DetailFragment
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
-class ListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListener {
+class MyListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListener {
 
     @Inject
     lateinit var presenter: ListPresenter
@@ -23,14 +23,13 @@ class ListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListener 
     lateinit var rootView: View
     private lateinit var session: Session
 
-    override fun onClick(view: View) {
-        presenter.loadData()
-        presenter.sendData(MovieData(666, "takkk", "nieee"))
+    override fun onClick(view: View, position: Int) {
+        showDetailFragment(position)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_list, container, false)
-        rootView.setOnClickListener(this)
+//        rootView.setOnClickListener(this)
         return rootView
     }
 
@@ -43,6 +42,7 @@ class ListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListener 
         presenter.loadData()//sendData(MovieData(1,"a","a"))
 //        ViewModelProvider.
         presenter.loadSimpleText("tak")
+        listAdapter.setOnItemClickListener(this)
 
     }
 
@@ -50,13 +50,14 @@ class ListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListener 
         activity!!.setTitle(R.string.list_fragment_title)
         list_botomNavigation.inflateMenu(R.menu.bottom_navigation)
         list_container.setLayoutManager(LinearLayoutManager(context))
-        listAdapter = ListAdapter(this!!.context!!, this)
+        listAdapter = ListAdapter(this!!.context!!)
+        listAdapter.setOnItemClickListener(this)
         list_container.adapter = listAdapter
     }
 
 
     override fun dataLoaded(data: List<MovieData>) {
-        listAdapter.setMovies(data)
+        listAdapter.setMovies(data.toSet())
     }
 
     fun dependencyInjection() {
@@ -77,13 +78,26 @@ class ListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListener 
     }
 
     override fun setTitle(title: String) {
-        activity!!.setTitle(title)
+        activity!!.setTitle(listAdapter.itemCount.toString())
     }
-    fun setSession(session: Session){
+
+    override fun showDetailFragment(position: Int) {
+        val fragment = DetailFragment.instance
+        fragment.setEditItem(listAdapter.getItem(position))
+        fragmentManager!!.beginTransaction()
+            .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+            .replace(
+                R.id.container_view,
+                fragment
+            )
+            .commit()
+    }
+
+    fun setSession(session: Session) {
         this.session = session
     }
 
     companion object {
-        val instance:ListFragment =ListFragment()
+        val INSTANCE: MyListFragment = MyListFragment()
     }
 }
