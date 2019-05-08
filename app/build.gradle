@@ -79,5 +79,8 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     implementation 'com.google.android.material:material:1.0.0'
 
+//corutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
+
 
 }

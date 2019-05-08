@@ -10,12 +10,16 @@ import android.view.ViewGroup
 
 import com.acante.kotlinsecretproject.R
 import com.acante.kotlinsecretproject.api.Session
+import com.acante.kotlinsecretproject.repo.model.RepoAccess.Repo
+import com.acante.kotlinsecretproject.ui.base.BaseActivity
 import com.acante.kotlinsecretproject.ui.list.MyListFragment
 import com.acante.kotlinsecretproject.ui.register.RegisterFragment
 import com.acante.kotlinsecretproject.utils.Constance.Companion.PREF_NAME
 import com.acante.kotlinsecretproject.utils.Constance.Companion.USER_EMAIL
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.coroutines.experimental.launch
+import javax.inject.Inject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,6 +35,7 @@ class LoginFragment : Fragment(), LoginContract.View {
     lateinit var rootView: View
     lateinit var presenter: LoginPresenter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        INSTANCE = this
@@ -39,8 +44,7 @@ class LoginFragment : Fragment(), LoginContract.View {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle? ): View? {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_login, container, false)
 
@@ -50,7 +54,7 @@ class LoginFragment : Fragment(), LoginContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter = LoginPresenter(context!!)
-        presenter.attache(this)
+        presenter.attache(this, activity as BaseActivity)
 
         initViews()
     }
@@ -65,17 +69,22 @@ class LoginFragment : Fragment(), LoginContract.View {
             var email = login_editText_email.text.toString()
             var pass = login_editText_password.text.toString()
             if (isEmailValid(email) && !pass.isEmpty()) {
-                login_text_error.visibility=View.INVISIBLE
+                login_text_error.visibility = View.INVISIBLE
+
                 presenter.loginToRest(email, pass)
-            }else{
+
+                login_progressBar.visibility = View.VISIBLE
+                login_button_login.isEnabled = false
+            } else {
                 login_editText_email.setText(this.email)
             }
         }
 
     }
 
+
     override fun showLoginErrorMessage() {
-        login_text_error.visibility=View.VISIBLE
+        login_text_error.visibility = View.VISIBLE
     }
 
     private fun isEmailValid(email: String): Boolean {
@@ -106,11 +115,10 @@ class LoginFragment : Fragment(), LoginContract.View {
             .commit()
     }
 
-    override fun showListFragment(session: Session) {
+    override fun showListFragment(email: String) {
         val sp = activity!!.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        sp.edit().putString(USER_EMAIL, session.getSessionUser().email).commit()
+        sp.edit().putString(USER_EMAIL, email).commit()
         val fragment = MyListFragment.INSTANCE
-        fragment.setSession(session)
         fragmentManager!!.beginTransaction()
             .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
             .replace(

@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.acante.kotlinsecretproject.R
 import com.acante.kotlinsecretproject.api.Session
 import com.acante.kotlinsecretproject.di.component.DaggerFragmentComponent
+import com.acante.kotlinsecretproject.di.component.DaggerRepoComponent
 import com.acante.kotlinsecretproject.di.module.FragmentModule
 import com.acante.kotlinsecretproject.repo.model.MovieData
+import com.acante.kotlinsecretproject.ui.base.BaseActivity
 import com.acante.kotlinsecretproject.ui.detail.DetailFragment
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
@@ -21,7 +23,6 @@ class MyListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListene
     lateinit var presenter: ListPresenter
     lateinit var listAdapter: ListAdapter
     lateinit var rootView: View
-    private lateinit var session: Session
 
     override fun onClick(view: View, position: Int) {
         showDetailFragment(position)
@@ -35,13 +36,16 @@ class MyListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListene
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presenter= ListPresenter()
         initView()
-        dependencyInjection()
-        presenter.attache(this)
-        presenter.addSession(session)
+        presenter= ListPresenter()
+        presenter.attache(this, activity as BaseActivity)
         presenter.loadData()//sendData(MovieData(1,"a","a"))
 //        ViewModelProvider.
         presenter.loadSimpleText("tak")
+        listAdapter = presenter.listAdapter
+        listAdapter.setOnItemClickListener(this)
+        list_container.adapter = listAdapter
         listAdapter.setOnItemClickListener(this)
 
     }
@@ -50,19 +54,12 @@ class MyListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListene
         activity!!.setTitle(R.string.list_fragment_title)
         list_botomNavigation.inflateMenu(R.menu.bottom_navigation)
         list_container.setLayoutManager(LinearLayoutManager(context))
-        listAdapter = ListAdapter(this!!.context!!)
-        listAdapter.setOnItemClickListener(this)
-        list_container.adapter = listAdapter
+
     }
 
 
     override fun dataLoaded(data: List<MovieData>) {
         listAdapter.setMovies(data.toSet())
-    }
-
-    fun dependencyInjection() {
-        var fragmentComponent = DaggerFragmentComponent.builder().fragmentModule(FragmentModule()).build()
-        fragmentComponent.inject(this)
     }
 
     override fun editItem(id: Int) {
@@ -91,10 +88,6 @@ class MyListFragment : Fragment(), ListContract.View, ListAdapter.OnClickListene
                 fragment
             )
             .commit()
-    }
-
-    fun setSession(session: Session) {
-        this.session = session
     }
 
     companion object {

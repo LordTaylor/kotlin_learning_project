@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.acante.kotlinsecretproject.R
+import com.acante.kotlinsecretproject.ui.base.BaseActivity
 import com.acante.kotlinsecretproject.ui.login.LoginFragment
 import kotlinx.android.synthetic.main.fragment_register.*
 
@@ -21,7 +22,7 @@ class RegisterFragment : Fragment(), RegisterContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter = RegisterPresenter(context!!)
-        presenter.attache(this)
+        presenter.attache(this, activity as BaseActivity)
         initViews()
     }
     private fun initViews(){

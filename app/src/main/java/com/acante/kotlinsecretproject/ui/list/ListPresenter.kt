@@ -1,69 +1,56 @@
 package com.acante.kotlinsecretproject.ui.list
 
-import android.annotation.SuppressLint
-import android.util.Log
-import com.acante.kotlinsecretproject.api.RequestInterface
-import com.acante.kotlinsecretproject.api.Session
+import com.acante.kotlinsecretproject.di.component.DaggerRepoComponent
 import com.acante.kotlinsecretproject.repo.model.MovieData
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.acante.kotlinsecretproject.repo.model.RepoAccess.Repo
+import com.acante.kotlinsecretproject.ui.base.BaseActivity
 import javax.inject.Inject
 
 class ListPresenter @Inject constructor() : ListContract.Presenter {
 
     lateinit var listAdapter: ListAdapter
     lateinit var view: ListContract.View
-    private lateinit var api: RequestInterface
-    private lateinit var session: Session
+    lateinit var repo: Repo
 
-    override fun sendData(movieData: MovieData) {
-        api.postUser(movieData)
-            .subscribeOn(Schedulers.io())
-            .unsubscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Log.d(TAG, "message : $it")
-            }, {
-                Log.d(TAG, "Message: ${it.localizedMessage}")
-            })
+    init {
+
+    }
+    override fun attache(view: ListContract.View,activity: BaseActivity) {
+        this.view = view
+        repo=activity.getMyRepo()
+        listAdapter=ListAdapter(activity)
+//        api = RequestInterface.create()
     }
 
-    @SuppressLint("CheckResult")
+    override fun sendData(movieData: MovieData) {
+//        repo.api.postUser(movieData)
+//            .subscribeOn(Schedulers.io())
+//            .unsubscribeOn(Schedulers.computation())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({
+//                Log.d(TAG, "message : $it")
+//            }, {
+//                Log.d(TAG, "Message: ${it.localizedMessage}")
+//            })
+    }
+
+
     override fun loadSimpleText(text: String) {
-        api.getPrivateData(session.getAuthentication(),token = session.tokenResponse.getAccessToken()!!)
-            .subscribeOn(Schedulers.io())
-            .unsubscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    view.setTitle(it)
-                }, {
-                    Log.d(ListPresenter.TAG, "error message load simple text: ${(it.localizedMessage)}")
-                }
-            )
+//        api.getPrivateData(repo.session.getAuthentication(), token = repo.session.tokenResponse.getAccessToken()!!)
+//            .subscribeOn(Schedulers.io())
+//            .unsubscribeOn(Schedulers.computation())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(
+//                {
+//                    view.setTitle(it)
+//                }, {
+//                    Log.d(ListPresenter.TAG, "error message load simple text: ${(it.localizedMessage)}")
+//                }
+//            )
     }
 
     override fun loadData() {
-        api.getData()
-            .subscribeOn(Schedulers.io())
-            .unsubscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    view.dataLoaded(it)
-                }, {
-                    Log.d(ListPresenter.TAG, "error message : $it.localizedMessage")
-                }
-            )
-    }
-
-    override fun attache(view: ListContract.View) {
-        this.view = view
-        api = RequestInterface.create()
-    }
-
-    override fun addSession(session: Session) {
-        this.session = session
+        repo.loadData(this)
     }
 
 

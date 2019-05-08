@@ -10,7 +10,7 @@ interface LoginContract : BaseCotract {
 
     interface View : BaseCotract.View {
         fun showListFragment(user: FirebaseUser)
-        fun showListFragment(session: Session)
+        fun showListFragment(email: String)
         fun showRegisterFragment()
         fun setEmail(email: String = "")
         fun showLoginErrorMessage()

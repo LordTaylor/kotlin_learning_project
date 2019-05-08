@@ -36,16 +36,11 @@ class DetailFragment : Fragment(), DetailContract.View {
     }
 
 
-    private fun dependencyInjection() {
-
-        var fragmentComponent = DaggerFragmentComponent.builder().fragmentModule(FragmentModule()).build()
-        fragmentComponent.inject(this)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        dependencyInjection()
+        presenter=DetailPresenter()
     }
 
     private fun initView() {

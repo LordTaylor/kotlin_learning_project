@@ -10,16 +10,15 @@ import dagger.Provides
 @Module
 class FragmentModule {
 
-    @Provides
-    fun provideListPresenter(view: ListContract.View): ListContract.Presenter{
-        var presenter = ListPresenter()
-        return presenter
-    }
-
-    @Provides
-    fun provideDetalPresenter(view: DetailContract.View): DetailContract.Presenter {
-        var presenter = DetailPresenter()
-        return presenter
-
-    }
+//    @Provides
+//    fun provideListPresenter(view: ListContract.View): ListContract.Presenter{
+//        var presenter = ListPresenter()
+//        return presenter
+//    }
+//
+//    @Provides
+//    fun provideDetalPresenter(view: DetailContract.View): DetailContract.Presenter {
+//        var presenter = DetailPresenter()
+//        return presenter
+//    }
 }

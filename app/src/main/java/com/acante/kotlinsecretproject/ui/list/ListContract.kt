@@ -2,6 +2,7 @@ package com.acante.kotlinsecretproject.ui.list
 
 import com.acante.kotlinsecretproject.api.Session
 import com.acante.kotlinsecretproject.repo.model.MovieData
+import com.acante.kotlinsecretproject.repo.model.RepoAccess.Repo
 import com.acante.kotlinsecretproject.ui.base.BaseCotract
 import dagger.Provides
 
@@ -10,7 +11,6 @@ interface ListContract{
         fun loadData()
         fun loadSimpleText(text:String)
         fun sendData(movieData: MovieData)
-        fun addSession(session: Session)
     }
     interface View : BaseCotract.View{
         fun editItem(id:Int)

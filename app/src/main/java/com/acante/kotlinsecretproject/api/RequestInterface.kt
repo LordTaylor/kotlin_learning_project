@@ -10,14 +10,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import com.google.gson.GsonBuilder
 import com.google.gson.Gson
-
-
+import retrofit2.Call
+import retrofit2.CallAdapter
+import retrofit2.Retrofit
 
 
 interface RequestInterface {
 
-    @GET("/jsony")
-    fun getData(): Observable<List<MovieData>>
+    @GET("/private/list")
+    fun getData(@Header("Authorization") auth: String,@Query("access_token") token: String): Observable<List<MovieData>>
 
     @GET("repos/{owner}/{name}")
     fun getRepo(@Path("owner") owner: String, @Path("name") name: String): Single<Repo>
@@ -47,9 +48,17 @@ interface RequestInterface {
     @POST("/oauth/token")
     @FormUrlEncoded
     fun getToken(
-        @Header("Authorization") au: String, @Field("grant_type") grant_type: String, @Field("username") username: String, @Field(
+        @Header("Authorization") auth: String, @Field("grant_type") grant_type: String, @Field("username") username: String, @Field(
             "password"
         ) password: String
     ): Observable<TokenResponse>
+
+    @POST("/oauth/token")
+    @FormUrlEncoded
+    fun getToken2(
+        @Header("Authorization") auth: String, @Field("grant_type") grant_type: String, @Field("username") username: String, @Field(
+            "password"
+        ) password: String
+    ): Call<TokenResponse>
 
 }

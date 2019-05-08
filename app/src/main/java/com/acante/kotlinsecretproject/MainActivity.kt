@@ -3,6 +3,11 @@ package com.acante.kotlinsecretproject
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.acante.kotlinsecretproject.di.component.DaggerFragmentComponent
+import com.acante.kotlinsecretproject.di.component.DaggerRepoComponent
+import com.acante.kotlinsecretproject.di.component.RepoComponent
+import com.acante.kotlinsecretproject.di.module.FragmentModule
+import com.acante.kotlinsecretproject.repo.model.RepoAccess.Repo
 import com.acante.kotlinsecretproject.ui.base.BaseActivity
 import com.acante.kotlinsecretproject.ui.detail.DetailFragment
 import com.acante.kotlinsecretproject.ui.list.MyListFragment
@@ -11,6 +16,7 @@ import com.acante.kotlinsecretproject.ui.main.MainContract
 import com.acante.kotlinsecretproject.ui.main.MainPresenter
 import com.acante.kotlinsecretproject.ui.register.RegisterFragment
 import com.acante.kotlinsecretproject.utils.Constance
+import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainContract.View {
 
@@ -19,14 +25,20 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     val TAG: String = "MainActivity"
 
+    @Inject
+    lateinit var repo: Repo
+
+    override fun getMyRepo(): Repo {
+        return repo
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        repo = Repo.INSTANCE
         presenter = MainPresenter()
-        presenter.attache(this)
+        presenter.attache(this,this)
 
-        injectDependency()
 
     }
     override fun getUserEmail(){
@@ -39,11 +51,6 @@ class MainActivity : BaseActivity(), MainContract.View {
             showLoginFragment(name)
         }
     }
-
-    private fun injectDependency() {
-
-    }
-
 
     override fun showListFragment() {
         supportFragmentManager.beginTransaction()

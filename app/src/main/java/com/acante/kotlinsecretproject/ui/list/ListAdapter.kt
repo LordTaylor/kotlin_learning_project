@@ -15,9 +15,8 @@ import javax.inject.Inject
 
 class ListAdapter(val context: Context) : RecyclerView.Adapter<ListAdapter.DataViewHolder>() {
 
-    @Inject
-    lateinit var repo: Repo
-//    private val movieList: MutableSet<MovieData> = mutableSetOf<MovieData>()
+
+    private val movieList: MutableSet<MovieData> = mutableSetOf<MovieData>()
     lateinit var listener: OnClickListener
     //     lateinit var context:Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
@@ -25,10 +24,10 @@ class ListAdapter(val context: Context) : RecyclerView.Adapter<ListAdapter.DataV
     }
 
     override fun getItemCount(): Int {
-        return repo.movieList.size
+        return movieList.size
     }
     fun getItem(position:Int):MovieData{
-        return repo.movieList.elementAt(position)
+        return movieList.elementAt(position)
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
@@ -37,7 +36,7 @@ class ListAdapter(val context: Context) : RecyclerView.Adapter<ListAdapter.DataV
     }
 
     fun setMovies(data: Set<MovieData>) {
-        repo.movieList.addAll(data)
+        movieList.addAll(data)
         notifyDataSetChanged()
     }
     fun setOnItemClickListener(listener: OnClickListener){
@@ -57,8 +56,8 @@ class ListAdapter(val context: Context) : RecyclerView.Adapter<ListAdapter.DataV
         var movieAvatar: ImageView = itemView.findViewById(R.id.movie_avatar)
 
         fun onBind(id:Int) {
-            title.text = repo.movieList.elementAt(id).title
-            movieCategory.text = repo.movieList.elementAt(id).year
+            title.text = movieList.elementAt(id).title
+            movieCategory.text = movieList.elementAt(id).year
             view.setOnClickListener({
                 listener.onClick(view,adapterPosition)
             })
