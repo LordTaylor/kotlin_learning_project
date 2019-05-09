@@ -10,19 +10,23 @@ import com.acante.kotlinsecretproject.repo.model.RepoAccess.Repo
 import com.acante.kotlinsecretproject.repo.model.User
 import com.acante.kotlinsecretproject.ui.base.BaseActivity
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 private const val TAG = "LoginPresenter"
 
 class LoginPresenter(val context: Context) : LoginContract.Presenter {
-//    private lateinit var auth: FirebaseAuth
+    //    private lateinit var auth: FirebaseAuth
     lateinit var view: LoginContract.View
 
     lateinit var repo: Repo
 
     override fun loginToRest(userName: String, password: String) {
-
-        repo.getToken(userName,password,this)
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.Unconfined) {
+            repo.getToken2(userName, password, this@LoginPresenter)
+        }
+        }
     }
 
     override fun login(email: String, password: String) {
@@ -46,10 +50,10 @@ class LoginPresenter(val context: Context) : LoginContract.Presenter {
 //            }
     }
 
-    override fun attache(view: LoginContract.View,activity: BaseActivity) {
+    override fun attache(view: LoginContract.View, activity: BaseActivity) {
         this.view = view
 //        auth = FirebaseAuth.getInstance()
-        repo=activity.getMyRepo()
+        repo = activity.getMyRepo()
     }
 
     fun injectDependency() {

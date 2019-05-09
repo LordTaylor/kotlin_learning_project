@@ -4,6 +4,7 @@ import com.acante.kotlinsecretproject.di.component.DaggerRepoComponent
 import com.acante.kotlinsecretproject.repo.model.MovieData
 import com.acante.kotlinsecretproject.repo.model.RepoAccess.Repo
 import com.acante.kotlinsecretproject.ui.base.BaseActivity
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class ListPresenter @Inject constructor() : ListContract.Presenter {
@@ -50,7 +51,11 @@ class ListPresenter @Inject constructor() : ListContract.Presenter {
     }
 
     override fun loadData() {
-        repo.loadData(this)
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.Unconfined) {
+                repo.loadData2(this@ListPresenter)
+            }
+        }
     }
 
 

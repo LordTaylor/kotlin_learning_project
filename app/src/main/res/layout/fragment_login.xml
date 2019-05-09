@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
             android:hint="@string/login_hint_text_login"
             android:background="@drawable/drawable_round_edit_file"
-            app:layout_constraintTop_toBottomOf="@+id/login_text_error"/>
+            app:layout_constraintTop_toBottomOf="@+id/login_text_error" android:text="user@us.pl"/>
     <EditText
             android:layout_width="0dp"
             android:textAlignment="center"
@@ -31,7 +31,7 @@
             app:layout_constraintTop_toBottomOf="@+id/login_editText_email"
             app:layout_constraintStart_toStartOf="@+id/login_editText_email"
             app:layout_constraintEnd_toEndOf="@+id/login_editText_email" android:hint="@string/login_hint_text_password"
-            android:background="@drawable/drawable_round_edit_file"/>
+            android:background="@drawable/drawable_round_edit_file" android:text="user"/>
     <TextView
             android:text="@string/login_text_view_register"
             android:layout_width="0dp"

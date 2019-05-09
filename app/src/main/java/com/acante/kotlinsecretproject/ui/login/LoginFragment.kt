@@ -18,8 +18,6 @@ import com.acante.kotlinsecretproject.utils.Constance.Companion.PREF_NAME
 import com.acante.kotlinsecretproject.utils.Constance.Companion.USER_EMAIL
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.coroutines.experimental.launch
-import javax.inject.Inject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

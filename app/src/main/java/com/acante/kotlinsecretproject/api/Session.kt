@@ -3,8 +3,10 @@ package com.acante.kotlinsecretproject.api
 import android.util.Base64
 import com.acante.kotlinsecretproject.repo.model.User
 import com.acante.kotlinsecretproject.utils.Constance
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -35,9 +37,9 @@ class Session @Inject constructor() {
 
 
     fun isSesionValid():Boolean {
-        launch(UI) {
-            withContext(coroutineContext){
-                delay(1,TimeUnit.SECONDS)
+        CoroutineScope(Dispatchers.Default).launch {
+            withContext(Dispatchers.Default){
+//                delay(1,TimeUnit.SECONDS)
                 if(::tokenResponse.isInitialized){
                     valid = true
                 }
